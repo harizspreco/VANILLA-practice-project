@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyProject</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Oswald:wght@500&family=Roboto:wght@300&display=swap"
+        rel="stylesheet">
+
+
+    <link rel="stylesheet" href="/assets/styles/main.css">
+</head>
+
+<body>
+    <div class="header">
+        <h3 class="logo">DCCS Tuzla</h3>
+        <div class="language">
+            <h5 class="lang">Language:</h5>
+            <select name="lang-choice" id="lang-id">
+                <option value="english">English</option>
+                <option value="german">German</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="content-container">
+
+        <div class="nav-col">
+            <ul class="navigation-list">
+                <li class="list-item" id="home-item">
+                    <div class="item-box home active">
+                        <img class="home-img" src="/assets/img/home.png" alt="home">
+                        <a class="nav-item" href="#">
+                            Home
+                        </a>
+                    </div>
+                    <div class="tracker"></div>
+                </li>
+                <li class="list-item" id="mas-learning">
+                    <div class="item-box">
+                        <img class="burger-img" src="/assets/img/burger.png" alt="burger">
+                        <a class="nav-item" href="#">
+                            Maschine Learning
+                        </a>
+                    </div>
+                    <div class="tracker" style="display: none;"></div>
+                    <ul style="display: none;">
+                        <li class="nested-list-item">
+                            <a class="nav-item-child" id="ex1" href="#">Example 1</a>
+                        </li>
+                        <li class="nested-list-item">
+                            <a class="nav-item-child" id="ex2" href="#">Example 2</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-col">
+
+            <div class="main-content" id="homescreen" style="display: block;">Start</div>
+
+            <div class="main-content" id="table-view" style="display: none;">
+                <a class="new-cert" href="/nc_form.html" target="_blank">
+                    <button type="button" class="new-cert-btn">New certificate</button>
+                </a>
+                <div id="data-table">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script src="/assets/js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewCertificate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Oswald:wght@500&family=Roboto:wght@300&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/styles/nc_form_style.css">
+</head>
+
+<body>
+
+    <div class="fixed-header">
+        <div class="header">
+            <div class="user-drd">
+                <h5 class="user">User:</h5>
+                <select name="user-choice" id="user-id">
+                </select>
+            </div>
+            <div class="language-drd">
+                <h5 class="lang">Language:</h5>
+                <select name="lang-choice" id="lang-id">
+                    <option value="english">English</option>
+                    <option value="german">German</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="supplier-lookup-window" style="display: none;">
+        <div class="lookup-container">
+            <div class="lookup-header">
+                <div class="header-caption">
+                    <p>Search for suppliers</p>
+                </div>
+                <button class="exit-sup-win">x</button>
+            </div>
+            <div class="search-criteria">
+                <p>Search criteria</p>
+            </div>
+
+            <form id="supplier-lookup-form" action="#"">
+                <div class=" input-part">
+                <div class="input1">
+                    <label for=" name">Supplier Name</label>
+                    <input type="text" name="name" id="name">
+                </div>
+                <div class="input1">
+                    <label for=" name">Supplier Index</label>
+                    <input type="text" name="name" id="index">
+                </div>
+                <div class="input1">
+                    <label for=" name">City</label>
+                    <input type="text" name="name" id="city">
+                </div>
+        </div>
+        <div class="btn-part">
+            <button onclick="filterSuppliers()" type="button">Search</button>
+            <button onclick="resetFilter()" type="reset">Reset</button>
+        </div>
+        </form>
+
+        <div class="supplier-list">
+            <p>Suplier List</p>
+        </div>
+        <div class="supplier-list-container">
+            <form action="#">
+                <div id="data-table">
+                    <table id="html-data-table">
+                        <tr>
+                            <th></th>
+                            <th>Supplier Name</th>
+                            <th>Supplier Index</th>
+                            <th>City</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="sup-lu-sel" class="del-ed-btn"></button></td>
+                            <td>AdoCompany</td>
+                            <td>1</td>
+                            <td>Tuzla</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="sup-lu-sel" class="del-ed-btn"></button></td>
+                            <td>AdokoCompany</td>
+                            <td>5</td>
+                            <td>Tuzla</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="sup-lu-sel" class="del-ed-btn"></button></td>
+                            <td>NekoCompany</td>
+                            <td>2</td>
+                            <td>luzla</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="sup-lu-sel" class="del-ed-btn"></button></td>
+                            <td>DaCompany</td>
+                            <td>3</td>
+                            <td>fuzla</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <button disabled class="select-btn" type="button">Select</button>
+                <button class="cancel-btn" type="button">Cancel</button>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <div class="main-form-container">
+        <h1 class="cert-name">New Certificate</h1>
+
+        <!-- <div class="supplier-lookup">
+            <label class="supplier-search-label" for="supplier" style="display: block;">Supplier</label>
+            <form action="search-bar">
+                <input class="supplier-search" type="text" name="supplier" id="supplier">
+                <button type="submit">-o</button>
+                <button type="reset">x</button>
+            </form>
+        </div> -->
+
+        <div class="cert-form-container">
+            <form id="add-cert-form" action="#">
+                <div class="form-container">
+
+                    <div class="left">
+
+                        <label for="suppl-inp">Supplier</label>
+                        <div class="suppl-div">
+                            <input type="text" name="suppl-inp" id="suppl-inp">
+                            <button type="button" class="btn-open" href="#"><img src="assets/img/search.png"></button>
+                            <button type="reset" class="btn-reset" href="#""><img src=" assets/img/close.png"></a>
+                        </div>
+
+                        <label for="ctype">Certificate type</label>
+                        <select id="ctype" name="ctype" required>
+                            <option value="">Select your option</option>
+                            <option value="opcija">Opcija 1</option>
+                        </select>
+
+                        <label for="validf">Valid from</label>
+                        <input type="date" name="validf" id="validf">
+
+                        <label for="validt">Valid to</label>
+                        <input type="date" name="validt" id="validt">
+                    </div>
+
+                    <div class="right">
+                        <button type="button">Upload</button>
+
+                        <iframe src="" frameborder="1"></iframe>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="add-participants-container">
+        <label for="addpart" style="display: block;">Assigned users</label>
+        <button type="button" id="addpart">Add participants</button>
+    </div>
+
+    <div id="data-table" class="participants-table">
+        <table id="html-data-table">
+            <tr>
+                <th></th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>User ID</th>
+                <th>Department</th>
+                <th>Plant</th>
+                <th></th>
+            </tr>
+        </table>
+    </div>
+
+    <div class="comment-container">
+        <div class="comment-section">
+        </div>
+        <button type="button" class="add-comment-btn">New Comment</button>
+        <form class="new-comment-section">
+            <label class="comment-label" for="comment"></label>
+            <textarea name="comment" id="comment" cols="70" rows="10"></textarea>
+            <button type="button" class="post-comment">Comment</button>
+        </form>
+
+    </div>
+
+    <div class="user-lookup-window" style="display: none;">
+        <div class="lookup-container">
+            <div class="lookup-header">
+                <div class="header-caption">
+                    <p>Search for persons</p>
+                </div>
+                <button class="exit-us-win">x</button>
+            </div>
+            <div class="search-criteria">
+                <p>v Search criteria</p>
+            </div>
+
+            <form id="user-lookup-form" action="#"">
+                <div class=" user-input-part">
+                <div class="input1">
+                    <label for="name">First Name</label>
+                    <input type="text" name="name" id="fname">
+                </div>
+                <div class="input1">
+                    <label for="name">Last Name</label>
+                    <input type="text" name="name" id="lname">
+                </div>
+                <div class="input1">
+                    <label for="name">User ID</label>
+                    <input type="text" name="name" id="userid">
+                </div>
+                <div class="input1">
+                    <label for="name">Department</label>
+                    <input type="text" name="name" id="dep">
+                </div>
+                <div class="input1">
+                    <label for="name">Plant</label>
+                    <input type="text" name="name" id="plant">
+                </div>
+        </div>
+        <div class="userlu-btn-part">
+            <button onclick="filterUsers()" type="button">Search</button>
+            <button type="reset" onclick="resetUserFilter()" form="user-lookup-form">Reset</button>
+        </div>
+        </form>
+
+        <div class="supplier-list">
+            <p>v Person List</p>
+        </div>
+        <div class="supplier-list-container-user">
+            <form action="#">
+                <div id="data-table">
+                    <table id="html-data-table" class="user-lookup-table">
+                        <tr>
+                            <th></th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>User ID</th>
+                            <th>Department</th>
+                            <th>Plant</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="us-sel-btn" class="del-ed-btn"></button></td>
+                            <td>Hariz</td>
+                            <td>Spreco</td>
+                            <td>F46HFD</td>
+                            <td>ITM/FP</td>
+                            <td>093</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="us-sel-btn" class="del-ed-btn"></button></td>
+                            <td>Ado</td>
+                            <td>Spreco</td>
+                            <td>F46HFD</td>
+                            <td>ITM/FP</td>
+                            <td>093</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="us-sel-btn" class="del-ed-btn"></button></td>
+                            <td>John</td>
+                            <td>Spreco</td>
+                            <td>F46HFD</td>
+                            <td>ITM/FP</td>
+                            <td>093</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <button disabled id="select-button" class="select-btn" type="button">Select</button>
+                <button id="cancel-button" class="cancel-btn" type="button">Cancel</button>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <script src="/assets/js/nc_form.js"></script>
+</body>
+
+</html>

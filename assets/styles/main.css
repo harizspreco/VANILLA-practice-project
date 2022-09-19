@@ -1,0 +1,235 @@
+body {
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  box-shadow: inset 2px black;
+  height: 8vh;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  background-color: #3f9ac9;
+  margin: 0px;
+  width: 25%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  font-weight: lighter;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: rgb(185, 185, 185);
+}
+
+#lang-id {
+  color: rgb(185, 185, 185);
+  border: 1px solid #3f9ac9;
+}
+
+.content-container {
+  display: grid;
+  grid-template-columns: 25% auto;
+}
+
+.nav-col {
+  position: relative;
+  background-color: rgb(221, 221, 221);
+  padding: 15px;
+  max-height: 70vh;
+}
+
+.home-img {
+  width: 20px;
+  position: relative;
+  top: 4px;
+  filter: invert(45%) sepia(78%) saturate(7%) hue-rotate(349deg) brightness(92%)
+    contrast(96%);
+}
+
+.burger-img {
+  width: 20px;
+  position: relative;
+  top: 4px;
+  filter: invert(45%) sepia(78%) saturate(7%) hue-rotate(349deg) brightness(92%)
+    contrast(96%);
+}
+
+.active {
+  filter: invert(56%) sepia(84%) saturate(372%) hue-rotate(158deg)
+    brightness(83%) contrast(88%);
+  color: #3f9ac9;
+}
+
+.item-box {
+  display: inline-block;
+}
+
+.item-box:hover {
+  filter: invert(56%) sepia(84%) saturate(372%) hue-rotate(158deg)
+    brightness(83%) contrast(88%);
+  color: #3f9ac9;
+  cursor: pointer;
+}
+
+.tracker {
+  display: inline-block;
+  background-color: #3f9ac9;
+  width: 8px;
+  height: 25px;
+  position: absolute;
+  left: 0px;
+}
+
+.nav-item-child {
+  font-size: 0.9em;
+}
+
+.nav-item-child:hover {
+  filter: invert(56%) sepia(84%) saturate(372%) hue-rotate(158deg)
+    brightness(83%) contrast(88%);
+  color: #3f9ac9;
+}
+
+.nav-item,
+.nav-item-child {
+  text-decoration: none;
+  color: rgb(124, 124, 124);
+}
+
+.nav-item,
+.nav-item-child:visited {
+  color: rgb(124, 124, 124);
+}
+
+ul {
+  list-style: none;
+  padding: 0px;
+}
+
+li > ul {
+  padding-left: 16px;
+}
+
+li {
+  margin: 10px;
+}
+
+.list-item {
+  margin: 6px 10px;
+}
+
+.main-content {
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+table {
+  width: 70%;
+  border: 1px outset rgba(170, 170, 170, 0.3);
+  font-weight: lighter;
+  font-size: 0.7em;
+  color: gray;
+  padding: 5px 15px;
+  border-spacing: 0px;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+td,
+th {
+  border: 1px outset rgba(170, 170, 170, 0.3);
+  text-align: left;
+  padding: 8px;
+}
+
+td {
+  border-right: none;
+  border-left: none;
+  border-top: none;
+}
+
+tr > td:first-child {
+  width: 1.5em;
+  padding: 8px 15px;
+}
+
+tr > th:first-child {
+  border-left: none;
+}
+
+tr > th:last-child {
+  border-right: none;
+}
+
+.new-cert-btn {
+  padding: 10px 30px;
+  border-radius: 2px;
+  border: 1px solid rgb(155, 233, 0);
+  background-color: rgb(200, 240, 21);
+  color: white;
+  margin-bottom: 3px;
+}
+
+.new-cert-btn:hover {
+  border: 1px solid rgb(108, 161, 0);
+  background-color: rgb(147, 177, 14);
+  cursor: pointer;
+}
+
+.icon {
+  width: 15px;
+  vertical-align: bottom;
+  cursor: pointer;
+  filter: invert(56%) sepia(84%) saturate(372%) hue-rotate(158deg)
+    brightness(83%) contrast(88%);
+}
+
+.del-ed-btn {
+  position: relative;
+}
+
+/* show edit delete dropdown */
+.del-ed-drd {
+  display: none;
+  margin-bottom: 80px;
+  margin-left: 20px;
+  width: 7em;
+  height: 5em;
+  z-index: 1;
+  background-color: whitesmoke;
+  box-shadow: -2px 2px 1px rgb(124, 124, 124);
+}
+
+.del-ed-drd.show {
+  display: block;
+  position: absolute;
+}
+
+.drd-link {
+  display: block;
+  height: 50%;
+  text-decoration: none;
+}
+.drd-link:visited {
+  color: black;
+  text-decoration: none;
+}
+
+.drd-link:hover {
+  background-color: #3f9ac9;
+}
