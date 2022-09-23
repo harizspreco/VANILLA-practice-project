@@ -81,34 +81,6 @@
                             <th>City</th>
                             <th></th>
                         </tr>
-                        <tr>
-                            <td><button type="button" id="sup-lu-sel" class="del-ed-btn"></button></td>
-                            <td>AdoCompany</td>
-                            <td>1</td>
-                            <td>Tuzla</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" id="sup-lu-sel" class="del-ed-btn"></button></td>
-                            <td>AdokoCompany</td>
-                            <td>5</td>
-                            <td>Tuzla</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" id="sup-lu-sel" class="del-ed-btn"></button></td>
-                            <td>NekoCompany</td>
-                            <td>2</td>
-                            <td>luzla</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" id="sup-lu-sel" class="del-ed-btn"></button></td>
-                            <td>DaCompany</td>
-                            <td>3</td>
-                            <td>fuzla</td>
-                            <td></td>
-                        </tr>
                     </table>
                 </div>
                 <button disabled class="select-btn" type="button">Select</button>
@@ -121,15 +93,6 @@
     <div class="main-form-container">
         <h1 class="cert-name">New Certificate</h1>
 
-        <!-- <div class="supplier-lookup">
-            <label class="supplier-search-label" for="supplier" style="display: block;">Supplier</label>
-            <form action="search-bar">
-                <input class="supplier-search" type="text" name="supplier" id="supplier">
-                <button type="submit">-o</button>
-                <button type="reset">x</button>
-            </form>
-        </div> -->
-
         <div class="cert-form-container">
             <form id="add-cert-form" action="#">
                 <div class="form-container">
@@ -138,7 +101,7 @@
 
                         <label for="suppl-inp">Supplier</label>
                         <div class="suppl-div">
-                            <input type="text" name="suppl-inp" id="suppl-inp">
+                            <input required readonly type="text" name="suppl-inp" id="suppl-inp" form="add-cert-form">
                             <button type="button" class="btn-open" href="#"><img src="assets/img/search.png"></button>
                             <button type="reset" class="btn-reset" href="#""><img src=" assets/img/close.png"></a>
                         </div>
@@ -146,19 +109,18 @@
                         <label for="ctype">Certificate type</label>
                         <select id="ctype" name="ctype" required>
                             <option value="">Select your option</option>
-                            <option value="opcija">Opcija 1</option>
                         </select>
 
                         <label for="validf">Valid from</label>
-                        <input type="date" name="validf" id="validf">
+                        <input required type="date" name="validf" id="validf">
 
                         <label for="validt">Valid to</label>
-                        <input type="date" name="validt" id="validt">
+                        <input required type="date" name="validt" id="validt">
                     </div>
 
                     <div class="right">
-                        <button type="button">Upload</button>
-
+                        <button id="uploadBtn" type="button">Upload</button>
+                        <!--onclick="window.location.href = `index.html`" -->
                         <iframe src="" frameborder="1"></iframe>
                     </div>
                 </div>
@@ -254,33 +216,6 @@
                             <th>Plant</th>
                             <th></th>
                         </tr>
-                        <tr>
-                            <td><button type="button" id="us-sel-btn" class="del-ed-btn"></button></td>
-                            <td>Hariz</td>
-                            <td>Spreco</td>
-                            <td>F46HFD</td>
-                            <td>ITM/FP</td>
-                            <td>093</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" id="us-sel-btn" class="del-ed-btn"></button></td>
-                            <td>Ado</td>
-                            <td>Spreco</td>
-                            <td>F46HFD</td>
-                            <td>ITM/FP</td>
-                            <td>093</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" id="us-sel-btn" class="del-ed-btn"></button></td>
-                            <td>John</td>
-                            <td>Spreco</td>
-                            <td>F46HFD</td>
-                            <td>ITM/FP</td>
-                            <td>093</td>
-                            <td></td>
-                        </tr>
                     </table>
                 </div>
                 <button disabled id="select-button" class="select-btn" type="button">Select</button>
@@ -290,6 +225,7 @@
     </div>
     </div>
 
+    <script src="/assets/js/idb_initData.js"></script>
     <script src="/assets/js/nc_form.js"></script>
 </body>
 

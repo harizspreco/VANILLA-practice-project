@@ -1,18 +1,92 @@
-/******************** USER CHOICE  *********************/
-let users = ["Hariz", "Ado", "John"];
-let userChoice = document.querySelector("#user-id");
-
-for (let i = 0; i < users.length; i++) {
-  let user = document.createElement("option");
-  user.id = `user-${i + 1}`;
-  user.innerText = users[i];
-  userChoice.appendChild(user);
+/******************** FIXED HEADER  *********************/
+if (top.location.pathname != "/nc_form.html") {
+  document.querySelector(".fixed-header").style.display = "none";
 }
+/******************** USER CHOICE  *********************/
+
+document.querySelector("#user-id").addEventListener("click", e => {
+  let userChoice = document.querySelector("#user-id");
+  //get the data from idb
+  if (userChoice.children.length === 0) {
+    const request = indexedDB.open("initData", 1);
+    request.onsuccess = () => {
+      console.log("initDatabase for user-choice opened successfully");
+      const db = request.result;
+      const transaction = db.transaction("usersStore", "readonly");
+      const store = transaction.objectStore("usersStore");
+
+      const users = store.getAll();
+      users.onsuccess = () => {
+        for (let i = 0; i < users.result.length; i++) {
+          let user = document.createElement("option");
+          user.id = `user-${users.result[i].userID}`;
+          user.innerText = users.result[i].firstName;
+          userChoice.appendChild(user);
+        }
+      };
+    };
+  }
+});
+/******************** CERTIFICATE TYPE CHOICE  *********************/
+
+document.querySelector("#ctype").addEventListener("click", e => {
+  let certChoice = document.querySelector("#ctype");
+  if (certChoice.children.length < 2) {
+    const request = indexedDB.open("initData", 1);
+    request.onsuccess = () => {
+      console.log("initDatabase for certype-choice opened successfully");
+      const db = request.result;
+      const transaction = db.transaction("certificateTypesStore", "readonly");
+      const store = transaction.objectStore("certificateTypesStore");
+
+      const certypes = store.getAll();
+      certypes.onsuccess = () => {
+        for (let i = 0; i < certypes.result.length; i++) {
+          let certype = document.createElement("option");
+          certype.id = `cert-${certypes.result[i].cerTypeID}`;
+          certype.innerText = certypes.result[i].cerTypeName;
+          certChoice.appendChild(certype);
+        }
+      };
+    };
+  }
+});
 
 /******************** OPEN/CLOSE SUPPLIER LOOKUP WINDOW  *********************/
+/******************** BUILD SUPPLIER LOOKUP TABLE FROM INDEXEDDB  *********************/
 
 document.querySelector(".btn-open").addEventListener("click", e => {
+  //display window
   document.querySelector(".supplier-lookup-window").style.display = "flex";
+  let table = document
+    .querySelector(".supplier-lookup-window")
+    .querySelector("#html-data-table");
+  if (table.children.length <= 1) {
+    //get the data from idb
+    const request = indexedDB.open("initData", 1);
+
+    request.onsuccess = () => {
+      console.log("initDatabase opened successfully");
+      const db = request.result;
+      const transaction = db.transaction("suppliersStore", "readonly");
+      const store = transaction.objectStore("suppliersStore");
+
+      const suppliers = store.getAll();
+      suppliers.onsuccess = () => {
+        for (let i = 0; i < suppliers.result.length; i++) {
+          let row = document.createElement("tr");
+          row.innerHTML = `
+           <td><button type="button" id="sup-lu-sel" class="del-ed-btn"></button></td>
+           <td>${suppliers.result[i].supplierName}</td>
+           <td>${suppliers.result[i].supplierID}</td>
+          <td>${suppliers.result[i].supplierCity}</td>
+          <td></td>`;
+          //fill the table
+          table.appendChild(row);
+        }
+      };
+    };
+  }
   e.preventDefault();
 });
 
@@ -27,9 +101,42 @@ document.querySelector(".cancel-btn").addEventListener("click", e => {
 });
 
 /******************** OPEN/CLOSE USER LOOKUP WINDOW  *********************/
+/******************** BUILD USER LOOKUP TABLE FROM INDEXEDDB  *********************/
 
 document.querySelector("#addpart").addEventListener("click", e => {
+  //display window
   document.querySelector(".user-lookup-window").style.display = "flex";
+  let table = document
+    .querySelector(".user-lookup-window")
+    .querySelector(".user-lookup-table");
+  if (table.children.length <= 1) {
+    //get the data from idb
+    const request = indexedDB.open("initData", 1);
+
+    request.onsuccess = () => {
+      console.log("initDatabase for users opened successfully");
+      const db = request.result;
+      const transaction = db.transaction("usersStore", "readonly");
+      const store = transaction.objectStore("usersStore");
+
+      const users = store.getAll();
+      users.onsuccess = () => {
+        for (let i = 0; i < users.result.length; i++) {
+          let row = document.createElement("tr");
+          row.innerHTML = `
+             <td><button type="button" id="us-sel-btn" class="del-ed-btn"></button></td>
+             <td>${users.result[i].firstName}</td>
+             <td>${users.result[i].lastName}</td>
+             <td>${users.result[i].userID}</td>
+            <td>${users.result[i].department}</td>
+            <td>${users.result[i].plant}</td>
+            <td></td>`;
+          //fill the table
+          table.appendChild(row);
+        }
+      };
+    };
+  }
   e.preventDefault();
 });
 
@@ -309,7 +416,6 @@ document.querySelector(".user-lookup-window").addEventListener("click", e => {
           td.parentElement.innerHTML = `<a class="del-ed-btn"><img id="del-part-x" src="/assets/img/close.png">`;
         });
         document.querySelector(".user-lookup-window").style.display = "none";
-        console.log(e.target);
       });
     } else {
       selekt.disabled = true;
@@ -321,6 +427,7 @@ document.querySelector(".user-lookup-window").addEventListener("click", e => {
 /***************** ADD COMMENT/SHOW COMMENT SECTION ***************************/
 
 document.querySelector(".add-comment-btn").addEventListener("click", e => {
+  let userChoice = document.querySelector("#user-id");
   document.querySelector(".new-comment-section").classList.toggle("show");
   let label = document.querySelector(".comment-label");
   label.innerText = userChoice.options[userChoice.selectedIndex].text;
@@ -329,12 +436,14 @@ document.querySelector(".add-comment-btn").addEventListener("click", e => {
 
 /***************** ADD COMMENT/SHOW COMMENT SECTION ***************************/
 
-userChoice.addEventListener("change", e => {
+document.querySelector("#user-id").addEventListener("change", e => {
+  let userChoice = document.querySelector("#user-id");
   let label = document.querySelector(".comment-label");
   label.innerText = userChoice.options[userChoice.selectedIndex].text;
 });
 
 document.querySelector(".post-comment").addEventListener("click", e => {
+  let userChoice = document.querySelector("#user-id");
   let commentSection = document.querySelector(".comment-section");
   let comment = document.querySelector("#comment");
 
@@ -369,5 +478,108 @@ document.querySelector(".participants-table").addEventListener("click", e => {
   }
   e.preventDefault();
 });
+/***************** RESTRIC CERTAIN DATES IN VALIDFROM DATEPICKER ***************************/
+document.getElementById("validf").addEventListener("change", e => {
+  document
+    .getElementById("validt")
+    .setAttribute("min", `${document.getElementById("validf").value}`);
+});
+//vice versa
+document.getElementById("validt").addEventListener("change", e => {
+  document
+    .getElementById("validf")
+    .setAttribute("max", `${document.getElementById("validt").value}`);
+});
+/***************** UPLOAD COMPLETE CERTIFICATE FORM ***************************/
 
-/***************** SUPPLIER LOOKUP SELECTED ROW ***************************/
+document.querySelector("#uploadBtn").addEventListener("click", e => {
+  //SUPPLIER
+  let supplier, certype, validf, validt, participants, comments, example;
+  supplier = document.getElementById("suppl-inp").value;
+  if (!supplier) {
+    document.querySelector(".supplier-lookup-window").style.display = "flex";
+    alert("You must select supplier from the lookup table!!!");
+    e.preventDefault();
+  }
+  //DATUM od
+  validf = document
+    .getElementById("validf")
+    .value.split("-")
+    .reverse()
+    .join("-");
+  //DATUM do
+  validt = document
+    .getElementById("validt")
+    .value.split("-")
+    .reverse()
+    .join("-");
+  //CERT TYPE
+  // document.getElementById('ctype').value //svaki item ima value opcija osim prvog koji je ''
+  let select = document.getElementById("ctype");
+  certype = select.options[select.options.selectedIndex].innerText;
+
+  //UZETI USER IDEVE DODANIH PARTICIPANATA
+  let rows = document
+    .querySelector(".participants-table")
+    .getElementsByTagName("tr");
+  let userids = [];
+  Array.from(rows).forEach(row => {
+    userids.push(row.children[3].innerText);
+  });
+  userids.shift();
+  participants = userids;
+
+  //UZETI SVE KOMENTARE KAO OBJEKTE I STRPATI U NIZ OBJEKATA
+  let commdivs = document.querySelectorAll(".each-comment");
+  let commarr = [];
+  if (commdivs) {
+    Array.from(commdivs).forEach(commdiv => {
+      let commobj = {};
+      commobj[commdiv.firstElementChild.innerText] =
+        commdiv.lastElementChild.innerText;
+      commarr.push(commobj);
+    });
+    comments = commarr;
+  }
+
+  //UZETI HASH OZNAKU
+  example = window.location.hash;
+
+  if (supplier && certype && validf && validt) {
+    if (example != "#ex1" && example != "#ex2" && example != "#ex3") {
+      example = "#ex1";
+    }
+    //dodati u bazu
+    const request = indexedDB.open("data", 1);
+
+    request.onsuccess = () => {
+      console.log("Database opened successfully");
+      const db = request.result;
+      const transaction = db.transaction("certificatesStore", "readwrite");
+      const store = transaction.objectStore("certificatesStore");
+
+      const supplierIndex = store.index("supplier");
+      const certificateTypeIndex = store.index("certificateType");
+      const validFromIndex = store.index("validFrom");
+      const validToIndex = store.index("validTo");
+      const assignedUsersIndex = store.index("assignedUsers");
+      const certificateCommentsIndex = store.index("certificateComments");
+      const exampleIndex = store.index("example");
+
+      store.put({
+        supplier: supplier,
+        certificateType: certype,
+        validFrom: validf,
+        validTo: validt,
+        assignedUsers: participants,
+        certificateComments: comments,
+        example: example,
+      });
+      transaction.oncomplete = () => {
+        console.log("Transaction successful");
+        alert("Certificate added successfully");
+        db.close();
+      };
+    };
+  }
+});

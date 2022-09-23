@@ -233,3 +233,20 @@ tr > th:last-child {
 .drd-link:hover {
   background-color: #3f9ac9;
 }
+
+.edit-cert-frame-cont {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  z-index: 1;
+}
+
+.edit-cert-frame {
+  height: 90%;
+  width: 80%;
+  overflow: scroll;
+}
