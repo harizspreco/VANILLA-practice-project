@@ -218,23 +218,39 @@ document.querySelector("#data-table").addEventListener("click", e => {
     e.target.parentElement.lastElementChild.classList.toggle("show");
     if (btn.classList.contains("show")) {
       btn.querySelector("#drd-link-delete").addEventListener("click", e => {
-        btn.parentElement.parentElement.parentElement.remove();
+        //remove cert from db
+        const request = indexedDB.open("data", 1);
+
+        request.onsuccess = () => {
+          console.log("Database fron indexhtml-delete opened successfully");
+
+          let idKey = parseInt(e.target.closest("tr").id);
+          const db = request.result;
+          const transaction = db.transaction("certificatesStore", "readwrite");
+          const store = transaction.objectStore("certificatesStore");
+          const certificate = store.delete(idKey);
+          certificate.onsuccess = () => {
+            btn.parentElement.parentElement.parentElement.remove();
+            console.log("Certificate has been removed");
+          };
+        };
         e.preventDefault();
       });
 
       btn.querySelector("#drd-link-edit").addEventListener("click", e => {
         document.querySelector(".edit-cert-frame-cont").style.display = "flex";
-        alert(
-          "If you don't change certificate type, it will stay same as before!"
-        );
         const request = indexedDB.open("data", 1);
 
         request.onsuccess = () => {
           console.log("Database fron indexhtml-edit opened successfully");
+          alert(
+            "If you don't change certificate type, it will stay same as before!"
+          );
+          let idKey = parseInt(e.target.closest("tr").id);
           const db = request.result;
           const transaction = db.transaction("certificatesStore", "readwrite");
           const store = transaction.objectStore("certificatesStore");
-          const certificate = store.get(parseInt(e.target.closest("tr").id));
+          const certificate = store.get(idKey);
           certificate.onsuccess = () => {
             console.log(certificate.result);
             let frame =
@@ -246,6 +262,8 @@ document.querySelector("#data-table").addEventListener("click", e => {
               "none";
             frame.document.querySelector(".comment-container").style.display =
               "none";
+            const updateBtn = frame.document.querySelector("#uploadBtn");
+            updateBtn.id = "updateBtn";
             /*********************************************** */
             let supplier, validf, validt;
             supplier = certificate.result.supplier;
@@ -287,10 +305,12 @@ document.querySelector("#data-table").addEventListener("click", e => {
               .value.split("-")
               .reverse()
               .join("-");
-            store.put(certificate.result);
-            transaction.oncomplete = () => {
-              alert("Certificate successfully updated");
-            };
+            updateBtn.addEventListener("submit", e => {
+              const updateCertificate = store.put(certificate.result, idKey);
+              updateCertificate.onsuccess = () => {
+                console.log("Certificate updated sucessfully!");
+              };
+            });
             //UPDATE TRENUTNO NE RADI KAKO TREBA, A ZURIM NA FAKULTET
             //UPDATE TRENUTNO NE RADI KAKO TREBA, A ZURIM NA FAKULTET
             //UPDATE TRENUTNO NE RADI KAKO TREBA, A ZURIM NA FAKULTET
