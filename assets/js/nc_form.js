@@ -430,7 +430,9 @@ document.querySelector(".add-comment-btn").addEventListener("click", e => {
   let userChoice = document.querySelector("#user-id");
   document.querySelector(".new-comment-section").classList.toggle("show");
   let label = document.querySelector(".comment-label");
-  label.innerText = userChoice.options[userChoice.selectedIndex].text;
+  if (userChoice.options[userChoice.selectedIndex]) {
+    label.innerText = userChoice.options[userChoice.selectedIndex].text;
+  }
   e.preventDefault();
 });
 

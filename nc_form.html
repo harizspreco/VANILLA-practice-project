@@ -27,8 +27,12 @@
             <div class="language-drd">
                 <h5 class="lang">Language:</h5>
                 <select name="lang-choice" id="lang-id">
-                    <option value="english">English</option>
-                    <option value="german">German</option>
+                    <a href="#">
+                        <option language="english" class="en">English</option>
+                    </a>
+                    <a href="#">
+                        <option language="german" class="de">German</option>
+                    </a>
                 </select>
             </div>
         </div>
@@ -38,37 +42,37 @@
         <div class="lookup-container">
             <div class="lookup-header">
                 <div class="header-caption">
-                    <p>Search for suppliers</p>
+                    <p id="sfs">Search for suppliers</p>
                 </div>
                 <button class="exit-sup-win">x</button>
             </div>
             <div class="search-criteria">
-                <p>Search criteria</p>
+                <p class="sc">Search criteria</p>
             </div>
 
             <form id="supplier-lookup-form" action="#"">
                 <div class=" input-part">
                 <div class="input1">
-                    <label for=" name">Supplier Name</label>
+                    <label for=" name" class="sn">Supplier Name</label>
                     <input type="text" name="name" id="name">
                 </div>
                 <div class="input1">
-                    <label for=" name">Supplier Index</label>
+                    <label for=" name" class="si">Supplier Index</label>
                     <input type="text" name="name" id="index">
                 </div>
                 <div class="input1">
-                    <label for=" name">City</label>
+                    <label for=" name" class="cn">City</label>
                     <input type="text" name="name" id="city">
                 </div>
         </div>
         <div class="btn-part">
-            <button onclick="filterSuppliers()" type="button">Search</button>
-            <button onclick="resetFilter()" type="reset">Reset</button>
+            <button onclick="filterSuppliers()" type="button" class="search">Search</button>
+            <button onclick="resetFilter()" type="reset" class="reset">Reset</button>
         </div>
         </form>
 
         <div class="supplier-list">
-            <p>Suplier List</p>
+            <p id="sl">Suplier List</p>
         </div>
         <div class="supplier-list-container">
             <form action="#">
@@ -76,9 +80,9 @@
                     <table id="html-data-table">
                         <tr>
                             <th></th>
-                            <th>Supplier Name</th>
-                            <th>Supplier Index</th>
-                            <th>City</th>
+                            <th class="sn">Supplier Name</th>
+                            <th class="si">Supplier Index</th>
+                            <th class="cn">City</th>
                             <th></th>
                         </tr>
                     </table>
@@ -99,22 +103,22 @@
 
                     <div class="left">
 
-                        <label for="suppl-inp">Supplier</label>
+                        <label for="suppl-inp" id="sp">Supplier</label>
                         <div class="suppl-div">
                             <input required readonly type="text" name="suppl-inp" id="suppl-inp" form="add-cert-form">
                             <button type="button" class="btn-open" href="#"><img src="assets/img/search.png"></button>
                             <button type="reset" class="btn-reset" href="#""><img src=" assets/img/close.png"></a>
                         </div>
 
-                        <label for="ctype">Certificate type</label>
+                        <label for="ctype" id="ct">Certificate type</label>
                         <select id="ctype" name="ctype" required>
                             <option value="">Select your option</option>
                         </select>
 
-                        <label for="validf">Valid from</label>
+                        <label for="validf" id="vf">Valid from</label>
                         <input required type="date" name="validf" id="validf">
 
-                        <label for="validt">Valid to</label>
+                        <label for="validt" id="vt">Valid to</label>
                         <input required type="date" name="validt" id="validt">
                     </div>
 
@@ -129,7 +133,7 @@
     </div>
 
     <div class="add-participants-container">
-        <label for="addpart" style="display: block;">Assigned users</label>
+        <label for="addpart" id="addpl" style="display: block;">Assigned users</label>
         <button type="button" id="addpart">Add participants</button>
     </div>
 
@@ -137,11 +141,11 @@
         <table id="html-data-table">
             <tr>
                 <th></th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>User ID</th>
-                <th>Department</th>
-                <th>Plant</th>
+                <th class="fn">First Name</th>
+                <th class="ln">Last Name</th>
+                <th class="uid">User ID</th>
+                <th class="dep">Department</th>
+                <th class="pl">Plant</th>
                 <th></th>
             </tr>
         </table>
@@ -163,45 +167,45 @@
         <div class="lookup-container">
             <div class="lookup-header">
                 <div class="header-caption">
-                    <p>Search for persons</p>
+                    <p id="sfp">Search for persons</p>
                 </div>
                 <button class="exit-us-win">x</button>
             </div>
             <div class="search-criteria">
-                <p>v Search criteria</p>
+                <p class="sc">v Search criteria</p>
             </div>
 
             <form id="user-lookup-form" action="#"">
                 <div class=" user-input-part">
                 <div class="input1">
-                    <label for="name">First Name</label>
+                    <label for="name" class="fn">First Name</label>
                     <input type="text" name="name" id="fname">
                 </div>
                 <div class="input1">
-                    <label for="name">Last Name</label>
+                    <label for="name" class="ln">Last Name</label>
                     <input type="text" name="name" id="lname">
                 </div>
                 <div class="input1">
-                    <label for="name">User ID</label>
+                    <label for="name" class="uid">User ID</label>
                     <input type="text" name="name" id="userid">
                 </div>
                 <div class="input1">
-                    <label for="name">Department</label>
+                    <label for="name" class="dep">Department</label>
                     <input type="text" name="name" id="dep">
                 </div>
                 <div class="input1">
-                    <label for="name">Plant</label>
+                    <label for="name" class="pl">Plant</label>
                     <input type="text" name="name" id="plant">
                 </div>
         </div>
         <div class="userlu-btn-part">
-            <button onclick="filterUsers()" type="button">Search</button>
-            <button type="reset" onclick="resetUserFilter()" form="user-lookup-form">Reset</button>
+            <button onclick="filterUsers()" type="button" class="search">Search</button>
+            <button type="reset" onclick="resetUserFilter()" form="user-lookup-form" class="reset">Reset</button>
         </div>
         </form>
 
         <div class="supplier-list">
-            <p>v Person List</p>
+            <p id="pli">v Person List</p>
         </div>
         <div class="supplier-list-container-user">
             <form action="#">
@@ -209,11 +213,11 @@
                     <table id="html-data-table" class="user-lookup-table">
                         <tr>
                             <th></th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>User ID</th>
-                            <th>Department</th>
-                            <th>Plant</th>
+                            <th class="fn">First Name</th>
+                            <th class="ln">Last Name</th>
+                            <th class="uid">User ID</th>
+                            <th class="dep">Department</th>
+                            <th class="pl">Plant</th>
                             <th></th>
                         </tr>
                     </table>
@@ -225,7 +229,7 @@
     </div>
     </div>
 
-    <script src="/assets/js/multiling.js"></script>
+    <script src="/assets/js/multilingform.js"></script>
     <script src="/assets/js/idb_initData.js"></script>
     <script src="/assets/js/nc_form.js"></script>
 </body>

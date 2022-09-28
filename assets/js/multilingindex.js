@@ -1,3 +1,5 @@
+//MULTILINGUAL OPTION IN INDEX.HTML PAGE
+
 let langChoice = document.getElementById("lang-id");
 let langOptions = document.querySelectorAll("option");
 let home = document.getElementById("homenav");
@@ -13,6 +15,7 @@ langChoice.addEventListener("change", e => {
   let attr = selected.getAttribute("language");
   home.textContent = langdata[attr].homenav;
   mlearning.textContent = langdata[attr].mlearningnav;
+  homescreen.textContent = langdata[attr].homescreen;
   language.textContent = langdata[attr].lang;
   en.textContent = langdata[attr].en;
   de.textContent = langdata[attr].de;
@@ -56,7 +59,7 @@ let langdata = {
     de: "Deutsch",
     homescreen: "Startseite",
     ncbtn: "Neues Zertifikat",
-    sp: "Anbieter",
+    sp: "Lieferant",
     ct: "Art des Zertifikats",
     vf: "Gültig ab",
     vt: "Gültig bis",
