@@ -22,8 +22,12 @@
         <div class="language">
             <h5 class="lang">Language:</h5>
             <select name="lang-choice" id="lang-id">
-                <option value="english">English</option>
-                <option value="german">German</option>
+                <a href="#">
+                    <option language="english" class="en">English</option>
+                </a>
+                <a href="#">
+                    <option language="german" class="de">German</option>
+                </a>
             </select>
         </div>
     </div>
@@ -35,7 +39,7 @@
                 <li class="list-item" id="home-item">
                     <div class="item-box home active">
                         <img class="home-img" src="/assets/img/home.png" alt="home">
-                        <a class="nav-item" href="#">
+                        <a class="nav-item" id="homenav" href="#">
                             Home
                         </a>
                     </div>
@@ -44,8 +48,8 @@
                 <li class="list-item" id="mas-learning">
                     <div class="item-box">
                         <img class="burger-img" src="/assets/img/burger.png" alt="burger">
-                        <a class="nav-item" href="#">
-                            Maschine Learning
+                        <a class="nav-item" id="mlearningnav" href="#">
+                            Machine Learning
                         </a>
                     </div>
                     <div class="tracker" style="display: none;"></div>
@@ -70,7 +74,7 @@
 
             <div class="main-content" id="table-view" style="display: none;">
                 <a class="new-cert" target="_blank">
-                    <button type="button" class="new-cert-btn">New certificate</button>
+                    <button type="button" class="new-cert-btn" id="ncbtn">New certificate</button>
                 </a>
                 <div id="data-table">
                 </div>
@@ -83,7 +87,7 @@
         <iframe class="edit-cert-frame" src="nc_form.html" frameborder="1"></iframe>
     </div>
 
-
+    <script src="/assets/js/multiling.js"></script>
     <script src="/assets/js/index.js"></script>
 </body>
 

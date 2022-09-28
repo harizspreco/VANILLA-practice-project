@@ -154,13 +154,18 @@ document.querySelector(".navigation-list").addEventListener("click", e => {
     table.id = "html-data-table";
     contentDiv.appendChild(table);
     let headerRow = document.createElement("tr");
+    //pokusaj
+    let langChoice = document.getElementById("lang-id");
+    let selected = langChoice.options[langChoice.selectedIndex];
+    let attr = selected.getAttribute("language");
+    //
     headerRow.innerHTML = `
     <tr>
       <th></th>
-      <th>Supplier</th>
-      <th>Certificate type</th>
-      <th>Valid from </th>
-      <th>Valid to</th>
+      <th id="sp">${langdata[attr].sp}</th>
+      <th id="ct">${langdata[attr].ct}</th>
+      <th id="vf">${langdata[attr].vf}</th>
+      <th id="vt">${langdata[attr].vt}</th>
       <th></th>
     </tr>`;
     table.appendChild(headerRow);
@@ -236,7 +241,12 @@ document.querySelector("#data-table").addEventListener("click", e => {
         };
         e.preventDefault();
       });
-
+      //
+      const updateBtn = document
+        .querySelector(".edit-cert-frame")
+        .contentWindow.document.querySelector("#uploadBtn");
+      updateBtn.id = "updateBtn";
+      //
       btn.querySelector("#drd-link-edit").addEventListener("click", e => {
         document.querySelector(".edit-cert-frame-cont").style.display = "flex";
         const request = indexedDB.open("data", 1);
@@ -262,8 +272,7 @@ document.querySelector("#data-table").addEventListener("click", e => {
               "none";
             frame.document.querySelector(".comment-container").style.display =
               "none";
-            const updateBtn = frame.document.querySelector("#uploadBtn");
-            updateBtn.id = "updateBtn";
+
             /*********************************************** */
             let supplier, validf, validt;
             supplier = certificate.result.supplier;
@@ -306,10 +315,11 @@ document.querySelector("#data-table").addEventListener("click", e => {
               .reverse()
               .join("-");
             updateBtn.addEventListener("submit", e => {
-              const updateCertificate = store.put(certificate.result, idKey);
-              updateCertificate.onsuccess = () => {
-                console.log("Certificate updated sucessfully!");
+              const certificateUpd = store.put(certificate.result, idKey);
+              certificateUpd.onsuccess = event => {
+                console.log("Certificate updated sucessfully!" + event);
               };
+              e.preventDefault();
             });
             //UPDATE TRENUTNO NE RADI KAKO TREBA, A ZURIM NA FAKULTET
             //UPDATE TRENUTNO NE RADI KAKO TREBA, A ZURIM NA FAKULTET

@@ -566,7 +566,7 @@ document.querySelector("#uploadBtn").addEventListener("click", e => {
       const certificateCommentsIndex = store.index("certificateComments");
       const exampleIndex = store.index("example");
 
-      store.put({
+      const addCert = store.put({
         supplier: supplier,
         certificateType: certype,
         validFrom: validf,
@@ -575,10 +575,8 @@ document.querySelector("#uploadBtn").addEventListener("click", e => {
         certificateComments: comments,
         example: example,
       });
-      transaction.oncomplete = () => {
-        console.log("Transaction successful");
-        alert("Certificate added successfully");
-        db.close();
+      addCert.onsuccess = e => {
+        console.log("Certificate added sucessfully!");
       };
     };
   }
