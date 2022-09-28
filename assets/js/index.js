@@ -241,12 +241,7 @@ document.querySelector("#data-table").addEventListener("click", e => {
         };
         e.preventDefault();
       });
-      //
-      const updateBtn = document
-        .querySelector(".edit-cert-frame")
-        .contentWindow.document.querySelector("#uploadBtn");
-      updateBtn.id = "updateBtn";
-      //
+      //edit btn
       btn.querySelector("#drd-link-edit").addEventListener("click", e => {
         document.querySelector(".edit-cert-frame-cont").style.display = "flex";
         const request = indexedDB.open("data", 1);
@@ -314,13 +309,11 @@ document.querySelector("#data-table").addEventListener("click", e => {
               .value.split("-")
               .reverse()
               .join("-");
-            updateBtn.addEventListener("submit", e => {
-              const certificateUpd = store.put(certificate.result, idKey);
-              certificateUpd.onsuccess = event => {
-                console.log("Certificate updated sucessfully!" + event);
-              };
-              e.preventDefault();
-            });
+
+            const certificateUpd = store.put(certificate.result, idKey);
+            certificateUpd.onsuccess = event => {
+              console.log("Certificate updated sucessfully!");
+            };
             //UPDATE TRENUTNO NE RADI KAKO TREBA, A ZURIM NA FAKULTET
             //UPDATE TRENUTNO NE RADI KAKO TREBA, A ZURIM NA FAKULTET
             //UPDATE TRENUTNO NE RADI KAKO TREBA, A ZURIM NA FAKULTET
