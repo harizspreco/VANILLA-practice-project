@@ -495,91 +495,93 @@ document.getElementById("validt").addEventListener("change", e => {
 /***************** UPLOAD COMPLETE CERTIFICATE FORM ***************************/
 
 document.querySelector("#uploadBtn").addEventListener("click", e => {
-  //SUPPLIER
-  let supplier, certype, validf, validt, participants, comments, example;
-  supplier = document.getElementById("suppl-inp").value;
-  if (!supplier) {
-    document.querySelector(".supplier-lookup-window").style.display = "flex";
-    alert("You must select supplier from the lookup table!!!");
-    e.preventDefault();
-  }
-  //DATUM od
-  validf = document
-    .getElementById("validf")
-    .value.split("-")
-    .reverse()
-    .join("-");
-  //DATUM do
-  validt = document
-    .getElementById("validt")
-    .value.split("-")
-    .reverse()
-    .join("-");
-  //CERT TYPE
-  // document.getElementById('ctype').value //svaki item ima value opcija osim prvog koji je ''
-  let select = document.getElementById("ctype");
-  certype = select.options[select.options.selectedIndex].innerText;
-
-  //UZETI USER IDEVE DODANIH PARTICIPANATA
-  let rows = document
-    .querySelector(".participants-table")
-    .getElementsByTagName("tr");
-  let userids = [];
-  Array.from(rows).forEach(row => {
-    userids.push(row.children[3].innerText);
-  });
-  userids.shift();
-  participants = userids;
-
-  //UZETI SVE KOMENTARE KAO OBJEKTE I STRPATI U NIZ OBJEKATA
-  let commdivs = document.querySelectorAll(".each-comment");
-  let commarr = [];
-  if (commdivs) {
-    Array.from(commdivs).forEach(commdiv => {
-      let commobj = {};
-      commobj[commdiv.firstElementChild.innerText] =
-        commdiv.lastElementChild.innerText;
-      commarr.push(commobj);
-    });
-    comments = commarr;
-  }
-
-  //UZETI HASH OZNAKU
-  example = window.location.hash;
-
-  if (supplier && certype && validf && validt) {
-    if (example != "#ex1" && example != "#ex2" && example != "#ex3") {
-      example = "#ex1";
+  if (top.location.pathname == "/nc_form.html") {
+    //SUPPLIER
+    let supplier, certype, validf, validt, participants, comments, example;
+    supplier = document.getElementById("suppl-inp").value;
+    if (!supplier) {
+      document.querySelector(".supplier-lookup-window").style.display = "flex";
+      alert("You must select supplier from the lookup table!!!");
+      e.preventDefault();
     }
-    //dodati u bazu
-    const request = indexedDB.open("data", 1);
+    //DATUM od
+    validf = document
+      .getElementById("validf")
+      .value.split("-")
+      .reverse()
+      .join("-");
+    //DATUM do
+    validt = document
+      .getElementById("validt")
+      .value.split("-")
+      .reverse()
+      .join("-");
+    //CERT TYPE
+    // document.getElementById('ctype').value //svaki item ima value opcija osim prvog koji je ''
+    let select = document.getElementById("ctype");
+    certype = select.options[select.options.selectedIndex].innerText;
 
-    request.onsuccess = () => {
-      console.log("Database opened successfully");
-      const db = request.result;
-      const transaction = db.transaction("certificatesStore", "readwrite");
-      const store = transaction.objectStore("certificatesStore");
+    //UZETI USER IDEVE DODANIH PARTICIPANATA
+    let rows = document
+      .querySelector(".participants-table")
+      .getElementsByTagName("tr");
+    let userids = [];
+    Array.from(rows).forEach(row => {
+      userids.push(row.children[3].innerText);
+    });
+    userids.shift();
+    participants = userids;
 
-      const supplierIndex = store.index("supplier");
-      const certificateTypeIndex = store.index("certificateType");
-      const validFromIndex = store.index("validFrom");
-      const validToIndex = store.index("validTo");
-      const assignedUsersIndex = store.index("assignedUsers");
-      const certificateCommentsIndex = store.index("certificateComments");
-      const exampleIndex = store.index("example");
-
-      const addCert = store.put({
-        supplier: supplier,
-        certificateType: certype,
-        validFrom: validf,
-        validTo: validt,
-        assignedUsers: participants,
-        certificateComments: comments,
-        example: example,
+    //UZETI SVE KOMENTARE KAO OBJEKTE I STRPATI U NIZ OBJEKATA
+    let commdivs = document.querySelectorAll(".each-comment");
+    let commarr = [];
+    if (commdivs) {
+      Array.from(commdivs).forEach(commdiv => {
+        let commobj = {};
+        commobj[commdiv.firstElementChild.innerText] =
+          commdiv.lastElementChild.innerText;
+        commarr.push(commobj);
       });
-      addCert.onsuccess = e => {
-        console.log("Certificate added sucessfully!");
+      comments = commarr;
+    }
+
+    //UZETI HASH OZNAKU
+    example = window.location.hash;
+
+    if (supplier && certype && validf && validt) {
+      if (example != "#ex1" && example != "#ex2" && example != "#ex3") {
+        example = "#ex1";
+      }
+      //dodati u bazu
+      const request = indexedDB.open("data", 1);
+
+      request.onsuccess = () => {
+        console.log("Database opened successfully");
+        const db = request.result;
+        const transaction = db.transaction("certificatesStore", "readwrite");
+        const store = transaction.objectStore("certificatesStore");
+
+        const supplierIndex = store.index("supplier");
+        const certificateTypeIndex = store.index("certificateType");
+        const validFromIndex = store.index("validFrom");
+        const validToIndex = store.index("validTo");
+        const assignedUsersIndex = store.index("assignedUsers");
+        const certificateCommentsIndex = store.index("certificateComments");
+        const exampleIndex = store.index("example");
+
+        const addCert = store.put({
+          supplier: supplier,
+          certificateType: certype,
+          validFrom: validf,
+          validTo: validt,
+          assignedUsers: participants,
+          certificateComments: comments,
+          example: example,
+        });
+        addCert.onsuccess = e => {
+          console.log("Certificate added sucessfully!");
+        };
       };
-    };
+    }
   }
 });

@@ -309,11 +309,15 @@ document.querySelector("#data-table").addEventListener("click", e => {
               .value.split("-")
               .reverse()
               .join("-");
-
-            const certificateUpd = store.put(certificate.result, idKey);
-            certificateUpd.onsuccess = event => {
-              console.log("Certificate updated sucessfully!");
-            };
+            certificate.result.example = top.location.hash;
+            frame.document
+              .querySelector("#uploadBtn")
+              .addEventListener("click", e => {
+                const certificateUpd = store.put(certificate.result, idKey);
+                certificateUpd.onsuccess = event => {
+                  console.log("Certificate updated sucessfully!");
+                };
+              });
             //UPDATE TRENUTNO NE RADI KAKO TREBA, A ZURIM NA FAKULTET
             //UPDATE TRENUTNO NE RADI KAKO TREBA, A ZURIM NA FAKULTET
             //UPDATE TRENUTNO NE RADI KAKO TREBA, A ZURIM NA FAKULTET

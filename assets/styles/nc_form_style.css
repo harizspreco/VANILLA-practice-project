@@ -558,3 +558,15 @@ tr > th:last-child {
 .show {
   display: block;
 }
+
+#uploadBtn:hover {
+  background-color: #1383bb;
+}
+
+.add-comment-btn {
+  background-color: rgb(0, 139, 231);
+}
+
+.add-comment-btn:hover {
+  background-color: #1383bb;
+}
