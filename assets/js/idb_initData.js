@@ -36,7 +36,7 @@
         supplierName: "Google",
         supplierCity: "Washington",
       });
-      suppliersStore.put({ supplierName: "DCCS", supplierCity: "Tuzla" });
+      suppliersStore.put({ supplierName: "Tes", supplierCity: "Tuzla" });
       suppliersStore.put({
         supplierName: "TopCompany",
         supplierCity: "Sarajevo",
@@ -75,7 +75,7 @@
       });
       usersStore.put({
         firstName: "Ado",
-        lastName: "Alicic",
+        lastName: "Dev",
         department: "IFB/IM",
         plant: "093",
       });
@@ -87,19 +87,19 @@
       });
       usersStore.put({
         firstName: "Almo",
-        lastName: "Alicic",
+        lastName: "Dev",
         department: "IFB/IM",
         plant: "093",
       });
       usersStore.put({
         firstName: "Saban",
-        lastName: "Saulic",
+        lastName: "Sabi",
         department: "IFN/IG",
         plant: "094",
       });
       usersStore.put({
-        firstName: "Sinan",
-        lastName: "Sakic",
+        firstName: "John",
+        lastName: "Doe",
         department: "IFN/IG",
         plant: "094",
       });
